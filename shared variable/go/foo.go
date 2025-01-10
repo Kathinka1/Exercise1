@@ -11,19 +11,28 @@ import (
 var i = 0
 
 func incrementing() {
+    for j:=0; j<1000000; j++ {
+        i++;
+    }
     //TODO: increment i 1000000 times
 }
 
 func decrementing() {
     //TODO: decrement i 1000000 times
+    for j:=0; j<1000000; j++ {
+        i--;
+    }
 }
 
 func main() {
     // What does GOMAXPROCS do? What happens if you set it to 1?
     runtime.GOMAXPROCS(2)    
+    // Setter antall GPU kjerner til 2
+    // Hvis man setter det til 1 vil bare en goroutine kunne kjøre samtidig!
 	
     // TODO: Spawn both functions as goroutines
-	
+	go incrementing()
+    go decrementing()
     // We have no direct way to wait for the completion of a goroutine (without additional synchronization of some sort)
     // We will do it properly with channels soon. For now: Sleep.
     time.Sleep(500*time.Millisecond)

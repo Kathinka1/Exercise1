@@ -20,12 +20,3 @@ Since both threads access and modify `i` simultaneously without synchronization,
 
 Without proper synchronization, the final value of `i` should not consistently be zero because the two threads are racing to update the same variable.
 
-## How to Fix It
-
-To ensure correct results, a synchronization mechanism such as a **mutex** can be used to lock the variable while one thread is updating it. This prevents both threads from modifying `i` at the same time.
-
-Example fix using a `pthread_mutex_t`:
-```c
-pthread_mutex_lock(&lock);
-i++;
-pthread_mutex_unlock(&lock);
